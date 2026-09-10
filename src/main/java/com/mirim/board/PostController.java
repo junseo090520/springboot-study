@@ -11,7 +11,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/posts")
 public class PostController {
-    private SmsNotifier notifier = new SmsNotifier();
+    private final Notifier notifier;
+
+    public PostController(Notifier notifier){
+        this.notifier = notifier;
+    }
 
     @GetMapping()
     public String getPosts(@RequestParam(required = false) String keyword){
