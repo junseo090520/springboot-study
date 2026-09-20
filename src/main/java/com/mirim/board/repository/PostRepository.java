@@ -1,30 +1,81 @@
 package com.mirim.board.repository;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Repository
 public class PostRepository {
-    //아직 진짜 저장소 없음
-    //컨트롤러에서 쓰던 가짜 규칙을 옮긴다
+    private final JdbcTemplate jdbcTemplate;
+    private final List<Map<String,Object>> posts =new ArrayList<>();
+    private Long nextId = 1L;
+
+    private final RowMapper<Map<String,Object>> postRowMapper = (rs, rowNum) -> {
+        Map<String,Object> post = new HashMap<>();
+        post.put("id",rs.getLong("id"));
+        post.put("title",rs.getLong("title"));
+        post.put("content",rs.getLong("content"));
+        return post;
+    };
+
+    public PostRepository(JdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public Map<String,Object> save(Map<String,Object> post){
+        post.put("id",nextId++);
+        posts.add(post);
+        return post;
+    }
     public boolean existsById(Long id){
-        return id <= 10;
+        return findById(id) != null;
     }
 
     public List<Map<String,Object>> findAll(){
-        return new ArrayList<>();
+        String sql = "SELECT * FROM posts";
+        jdbcTemplate.query(sql, postRowMapper);
+        return posts;
+    }
+
+    public Map<String,Object> findById(Long id){
+        //게시글 전체 : posts
+        for(Map<String,Object> post : posts){
+            if(post.get("id").equals(id)){
+                return post;
+            }
+        }
+        return null;
     }
 
     public long count(){
-        return 0;
+        return posts.size();
     }
 
     public List<Map<String,Object>> findByKeyword(String keyword){
-        //아직 진짜 데이터는 없다
-        return new ArrayList<>();
+        List<Map<String,Object>> result = new ArrayList<>();
+        //1. 전체 게시글을 순회하면서 keyword를 포함하는지 확인
+        for(Map<String,Object> post : posts){
+            String title = (String)post.get("title");
+            //2. 포함하면 result에 게시글 정보 추가
+            if(title != null && title.contains(keyword)){
+                result.add(post);
+            }
+        }
+        return result;
+    }
+
+    public boolean deleteById(Long id){
+        Map<String,Object> post = findById(id);
+        if(post == null){
+            return false;
+        }
+        posts.remove(post);
+        return true;
     }
 }
 
