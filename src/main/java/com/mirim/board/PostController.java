@@ -1,5 +1,7 @@
 package com.mirim.board;
 
+import com.mirim.board.dto.PostRequest;
+import com.mirim.board.dto.PostResponse;
 import com.mirim.board.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +24,10 @@ public class PostController {
     @GetMapping()
     public ResponseEntity getPosts(@RequestParam(required = false) String keyword){
         if(keyword != null){
-            List<Post> posts = postService.searchPosts(keyword);
+            List<PostResponse> posts = postService.searchPosts(keyword);
             return ResponseEntity.ok(posts);
         }
-        List<Post> posts = postService.getAllPosts();
+        List<PostResponse> posts = postService.getAllPosts();
         return ResponseEntity.ok(posts);
     }
 
@@ -41,7 +43,7 @@ public class PostController {
         if(id <= 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("게시글 번호는 1 이상이어야 합니다");
         }
-        Post post = postService.getPost(id);
+        PostResponse post = postService.getPost(id);
         if(post == null){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("존재하지 않는 게시물입니다.");
         }
@@ -49,21 +51,21 @@ public class PostController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> createPost(@RequestBody Map<String, Object> request){
-        String title = (String)request.get("title");
-        String content = (String)request.get("content");
+    public ResponseEntity<?> createPost(@RequestBody PostRequest request){
+        String title = request.getTitle();
+        String content = request.getContent();
 
-        Post response = postService.createPost(title,content);
+        PostResponse response = postService.createPost(title,content);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePost(@PathVariable Long id, @RequestBody Map<String, Object> request){
+    public ResponseEntity<?> updatePost(@PathVariable Long id, @RequestBody PostRequest request){
         if(id <= 0){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("게시글 번호는 1 이상이어야 합니다");
         }
-        String title = (String)request.get("title");
-        String content = (String)request.get("content");
+        String title = request.getTitle();
+        String content = request.getContent();
 
         Post response = postService.updatePost(id,title,content);
 
