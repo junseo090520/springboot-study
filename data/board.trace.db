@@ -105,3 +105,51 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
 	... 16 more
+2026-10-15 18:40:37.402764+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table members (\000d\000aid bigint auto_increment primary key,\000d\000alogin_id varchar(50) [*]not nul unique,\000d\000apassword varchar(100) not null,\000d\000aname varchar(30) not null, \000d\000acreated_at timestamp default current_timestamp not null\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table members (
+id bigint auto_increment primary key,
+login_id varchar(50) not nul unique,
+password varchar(100) not null,
+name varchar(30) not null, 
+created_at timestamp default current_timestamp not null
+) [42001-240]
+2026-10-15 18:40:41.169059+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table members (\000d\000aid bigint auto_increment primary key,\000d\000alogin_id varchar(50) [*]not nul unique,\000d\000apassword varchar(100) not null,\000d\000aname varchar(30) not null, \000d\000acreated_at timestamp default current_timestamp not null\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table members (
+id bigint auto_increment primary key,
+login_id varchar(50) not nul unique,
+password varchar(100) not null,
+name varchar(30) not null, 
+created_at timestamp default current_timestamp not null
+) [42001-240]
+2026-10-15 18:40:41.172059+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBERS" not found; SQL statement:
+select * from members [42102-240]
+2026-10-15 18:50:02.454851+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table members (\000d\000aid bigint auto_increment primary key,\000d\000alogin_id varchar(50) [*]not nul unique,\000d\000apassword varchar(100) not null,\000d\000aname varchar(30) not null, \000d\000acreated_at timestamp default current_timestamp not null\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table members (
+id bigint auto_increment primary key,
+login_id varchar(50) not nul unique,
+password varchar(100) not null,
+name varchar(30) not null, 
+created_at timestamp default current_timestamp not null
+) [42001-240]
+2026-10-15 18:51:50.780376+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table members (\000d\000aid bigint auto_increment primary key,\000d\000alogin_id varchar(50) [*]not nul unique,\000d\000apassword varchar(100) not null,\000d\000aname varchar(30) not null, \000d\000acreated_at timestamp default current_timestamp not null\000d\000a)"; expected "ARRAY, INVISIBLE, VISIBLE, NOT NULL, DEFAULT, GENERATED, ON UPDATE, NOT NULL, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+create table members (
+id bigint auto_increment primary key,
+login_id varchar(50) not nul unique,
+password varchar(100) not null,
+name varchar(30) not null, 
+created_at timestamp default current_timestamp not null
+) [42001-240]
+2026-10-15 18:52:33.762777+09:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBERS" already exists; SQL statement:
+create table members (
+id bigint auto_increment primary key,
+login_id varchar(50) not null unique,
+password varchar(100) not null,
+name varchar(30) not null, 
+created_at timestamp default current_timestamp not null
+) [42101-240]
