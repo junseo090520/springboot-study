@@ -3,6 +3,7 @@ package com.mirim.board;
 import com.mirim.board.dto.PostRequest;
 import com.mirim.board.dto.PostResponse;
 import com.mirim.board.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.objenesis.ObjenesisHelper;
@@ -44,14 +45,11 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("게시글 번호는 1 이상이어야 합니다");
         }
         PostResponse post = postService.getPost(id);
-        if(post == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("존재하지 않는 게시물입니다.");
-        }
         return ResponseEntity.ok(post);
     }
 
     @PostMapping()
-    public ResponseEntity<?> createPost(@RequestBody PostRequest request){
+    public ResponseEntity<?> createPost(@Valid @RequestBody PostRequest request){
         String title = request.getTitle();
         String content = request.getContent();
 
@@ -68,10 +66,6 @@ public class PostController {
         String content = request.getContent();
 
         Post response = postService.updatePost(id,title,content);
-
-        if(response == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("존재하지 않는 게시글입니다");
-        }
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
