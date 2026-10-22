@@ -11,6 +11,9 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false)
+    private Member author;
     @Column(nullable = false, length = 200)
     private String title;
     private String content;
@@ -21,9 +24,10 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String content) {
+    public Post(String title, String content, Member author) {
         this.title = title;
         this.content = content;
+        this.author = author;
         this.createdAt = LocalDateTime.now();
         this.viewCount = 0L;
     }
@@ -42,6 +46,10 @@ public class Post {
 
     public Long getViewCount() {
         return viewCount;
+    }
+
+    public Member getAuthor() {
+        return author;
     }
 
     public LocalDateTime getCreatedAt() {
