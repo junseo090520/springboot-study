@@ -19,6 +19,7 @@ public class PostController {
 
     public PostController(PostService postService){
         this.postService = postService;
+//        System.out.println("[확인] postService = " + postService.getClass());
     }
 
     @GetMapping()
@@ -76,4 +77,8 @@ public class PostController {
         return ResponseEntity.noContent().build();
     }
 
+//    @GetMapping("/proxy-test")
+//    public int proxyTest(){
+//        return postService.proxyTest();
+//    }
 }

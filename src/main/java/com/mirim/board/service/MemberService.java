@@ -18,6 +18,7 @@ public class MemberService {
     public MemberService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
         this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
+//        System.out.println("[확인] passwordEncoder = " + passwordEncoder.getClass());
     }
 
     public MemberResponse signup(SignupRequest request){
