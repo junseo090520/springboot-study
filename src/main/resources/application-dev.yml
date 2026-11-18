@@ -1,0 +1,10 @@
+spring:
+  h2:
+    console:
+      enabled: true       #개발용
+      path: /h2-console
+  jpa:
+    show-sql: true        #개발용
+    properties:
+      hibernate:
+        format_sql: true  #개발용
